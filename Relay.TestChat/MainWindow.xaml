@@ -1,0 +1,30 @@
+ <Window x:Class="Relay.TestChat.MainWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         mc:Ignorable="d"
+         Title="Relay.Server"
+        Height="600"
+        Width="600"
+        Icon="/Files/logo.jpg"
+        Loaded="WindowLoaded"
+        Closing="WindowClosing">
+    <StackPanel Margin="4">
+        <Label Content="Введите адресс сервера"/>
+        <TextBox x:Name="serverAdress"/>
+        <Label Content="Введите логин"/>
+        <TextBox x:Name="userTextBox"/>
+        <Label Content="Введите сообщение"/>
+        <TextBox x:Name="messageTextBox"/>
+        <Button x:Name="sendBtn"
+                Content="Отправить"
+                Click="ButtonClick"
+                IsEnabled="False"/>
+        <Button x:Name="reconect"
+                Content="Переподключиться"
+                Click="ReconnectButton"
+                IsEnabled="False"></Button>
+        <ListBox x:Name="chatbox"/>
+    </StackPanel>
+</Window>
