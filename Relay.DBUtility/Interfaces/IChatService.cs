@@ -10,7 +10,7 @@ namespace Relay.Services
     public interface IChatService
     {
         /// <summary> Получение чата по ID. </summary>
-        Task<Chat> GetChatAsync(int id);
+        Task<Chat> GetChatAsync(Guid id);
 
         /// <summary> Создание нового чата. </summary>
         Task<Chat> CreateChatAsync(Chat chat);

@@ -2,19 +2,21 @@ using Microsoft.EntityFrameworkCore;
 using Relay.DBUtility;
 using Relay.Models;
 using Serilog;
+using System;
+using System.Threading.Tasks;
 
 namespace Relay.Server.Services
 {
     public class UserUtilities
     {
-        private readonly DbServer _context;
+        private readonly ApplicationDbContext _context;
 
-        public UserUtilities(DbServer context)
+        public UserUtilities(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task Connect(int id, string userName)
+        public async Task Connect(Guid userId, string userName)
         {
             if (await IsUserExists(userName))
             {
@@ -22,7 +24,7 @@ namespace Relay.Server.Services
                 return;
             }
 
-            _context.Users.Add(new User { Id = id, Name = userName });
+            _context.Users.Add(new User { Id = userId, Name = userName });
             await _context.SaveChangesAsync();
             Log.Information("User {user} connected.", userName);
         }

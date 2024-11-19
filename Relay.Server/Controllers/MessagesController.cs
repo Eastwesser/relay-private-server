@@ -4,6 +4,7 @@ using Relay.Models;
 using Relay.DTOs;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
+using System;
 using System.Threading.Tasks;
 
 namespace Relay.Server.Controllers;
@@ -32,7 +33,7 @@ public class MessagesController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetMessage(int id)
+    public async Task<IActionResult> GetMessage(Guid id)
     {
         var culture = HttpContext.Items["RequestCulture"] as CultureInfo ?? new CultureInfo("ru");
         _logger.LogInformation("Получение сообщения на языке: {Culture}", culture.Name);

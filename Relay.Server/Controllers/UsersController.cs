@@ -4,30 +4,39 @@ using Relay.Services;
 using Relay.DTOs;
 using Relay.Models;
 using System.Globalization;
+using System;
 using System.Threading.Tasks;
 
-namespace Relay.Server.ControllersEastwesser;
-
-[ApiController]
-[Route("api/[controller]")]
-public class UsersController : ControllerBase
+namespace Relay.Server.Controllers
 {
-    private readonly IUserService _userService;
-    private readonly ILogger<UsersController> _logger;
-
-    public UsersController(IUserService userService, ILogger<UsersController> logger)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UsersController : ControllerBase
     {
-        _userService = userService;
-        _logger = logger;
-    }
+        private readonly IUserService _userService;
+        private readonly ILogger<UsersController> _logger;
 
-    [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] UserCreateDto userDto)
-    {
-        var culture = HttpContext.Items["RequestCulture"] as CultureInfo ?? new CultureInfo("ru");
-        _logger.LogInformation("Регистрация нового пользователя с именем {Username} на языке {Culture}", userDto.Name, culture.Name);
+        public UsersController(IUserService userService, ILogger<UsersController> logger)
+        {
+            _userService = userService;
+            _logger = logger;
+        }
 
-        var user = await _userService.RegisterAsync(userDto);
-        return Ok(user);
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] UserCreateDto userDto)
+        {
+            var culture = HttpContext.Items["RequestCulture"] as CultureInfo ?? new CultureInfo("ru");
+            _logger.LogInformation("Регистрация нового пользователя с именем {Username} на языке {Culture}", userDto.Name, culture.Name);
+
+            var user = await _userService.RegisterAsync(userDto);
+            return Ok(user);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(Guid id)
+        {
+            var user = await _userService.GetUserAsync(id);
+            return user == null ? NotFound() : Ok(user);
+        }
     }
 }

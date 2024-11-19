@@ -6,20 +6,28 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
+        <EnableDefaultPageItems>false</EnableDefaultPageItems>
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.10" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="photo_2024-10-22_13-43-12.jpg" />
+        <Resource Include="Files\logo.jpg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
     </ItemGroup>
 
     <ItemGroup>
-      <Resource Include="Files\logo.jpg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
+        <Page Include="MainWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+        <Compile Include="MainWindow.xaml.cs">
+            <DependentUpon>MainWindow.xaml</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ namespace Relay.Models
     public class Message
     {
         /// <summary> Идентификатор сообщения. </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         /// <summary> Дата и время отправки сообщения. </summary>
         public DateTime Timestamp { get; set; }
@@ -17,6 +17,6 @@ namespace Relay.Models
         public string Content { get; set; } = string.Empty;
 
         /// <summary> Идентификатор пользователя, который отправил сообщение. </summary>
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
     }
 }

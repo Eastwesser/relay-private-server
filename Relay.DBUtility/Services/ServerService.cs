@@ -14,8 +14,8 @@ namespace Relay.Services
             _context = context;
         }
 
-        public async Task<ServerDbModel?> GetServerAsync(int id) =>
-            await _context.Servers.FindAsync(id) ?? throw new KeyNotFoundException($"Server with ID {id} not found.");
+        public async Task<ServerDbModel?> GetServerAsync(Guid id) =>
+            await _context.Servers.FindAsync(id) ?? throw new KeyNotFoundException($"Сервер с ID {id} не найден.");
 
         public async Task<ServerDbModel> CreateServerAsync(ServerDbModel server)
         {

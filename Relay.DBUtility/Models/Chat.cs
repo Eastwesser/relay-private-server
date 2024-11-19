@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Relay.Models
@@ -8,12 +9,12 @@ namespace Relay.Models
     public class Chat
     {
         /// <summary> Идентификатор чата. </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         /// <summary> Название чата. </summary>
         public string Name { get; set; } = string.Empty;
 
-        /// <summary> Признак того, является ли чат групповым. </summary>
+        /// <summary> Является ли чат групповым. </summary>
         public bool IsGroupChat { get; set; }
 
         /// <summary> Список сообщений в чате. </summary>

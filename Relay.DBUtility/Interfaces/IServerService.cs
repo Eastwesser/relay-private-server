@@ -10,7 +10,7 @@ namespace Relay.Services
     public interface IServerService
     {
         /// <summary> Получение сервера по ID. </summary>
-        Task<ServerDbModel?> GetServerAsync(int id); // Изменено на ServerDbModel
+        Task<ServerDbModel?> GetServerAsync(Guid id);
 
         /// <summary> Создание нового сервера. </summary>
         Task<ServerDbModel> CreateServerAsync(ServerDbModel server); // Изменено на ServerDbModel

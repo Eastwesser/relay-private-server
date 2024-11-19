@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Relay.Services;
 using Relay.DTOs;
 using Relay.DBUtility.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace Relay.Server.Controllers
 {
@@ -17,7 +19,7 @@ namespace Relay.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetServer(int id)
+        public async Task<IActionResult> GetServer(Guid id)
         {
             var srv = await _serverService.GetServerAsync(id);
             return srv == null ? NotFound() : Ok(srv);

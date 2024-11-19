@@ -1,3 +1,5 @@
+using System;
+
 namespace Relay.Models
 {
     /// <summary>
@@ -6,7 +8,7 @@ namespace Relay.Models
     public class User
     {
         /// <summary> Идентификатор пользователя. </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         /// <summary> Имя пользователя. </summary>
         public string Name { get; set; } = string.Empty;

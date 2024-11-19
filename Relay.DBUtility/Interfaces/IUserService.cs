@@ -14,7 +14,7 @@ namespace Relay.Services
         Task<User> RegisterAsync(UserCreateDto userDto);
 
         /// <summary> Получение пользователя по ID. </summary>
-        Task<User?> GetUserAsync(int id);
+        Task<User?> GetUserAsync(Guid id);
 
         /// <summary> Создание нового пользователя. </summary>
         Task<User> CreateUserAsync(User user);

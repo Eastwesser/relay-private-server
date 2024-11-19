@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: relayuser
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: relaydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  relay-server:
+    build: .
+    ports:
+      - "5000:80"
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=relaydb;Username=relayuser;Password=password"
+volumes:
+  db_data:

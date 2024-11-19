@@ -13,6 +13,6 @@ namespace Relay.DTOs
         /// <summary>
         /// Идентификатор пользователя, создавшего сообщение
         /// </summary>
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
     }
 }

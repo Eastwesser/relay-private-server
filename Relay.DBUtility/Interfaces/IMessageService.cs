@@ -11,7 +11,7 @@ namespace Relay.Services
     public interface IMessageService
     {
         /// <summary> Получение сообщения по ID. </summary>
-        Task<Message> GetMessageAsync(int id);
+        Task<Message> GetMessageAsync(Guid id);
 
         /// <summary> Создание нового сообщения. </summary>
         Task<Message> CreateMessageAsync(MessageCreateDto messageDto);

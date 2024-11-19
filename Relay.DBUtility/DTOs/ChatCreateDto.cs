@@ -13,6 +13,6 @@ namespace Relay.DTOs
         /// <summary>
         /// Список идентификаторов участников чата
         /// </summary>
-        public List<int> MemberIds { get; set; } = new();
+        public List<Guid> MemberIds { get; set; } = new();
     }
 }

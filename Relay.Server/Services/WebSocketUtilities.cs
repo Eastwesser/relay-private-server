@@ -1,19 +1,42 @@
 using Microsoft.AspNetCore.SignalR;
-using Serilog;
+using Relay.DBUtility;
+using Relay.Models;
+using System;
+using System.Threading.Tasks;
 
-namespace Relay.Server.Services;
-
-public class WebSocketUtilities : Hub
+namespace Relay.Server.Services
 {
-    [HubMethodName("SendMessage")]
-    public async Task SendMessage(string user, string message)
+    public class WebSocketUtilities : Hub
     {
-        await Clients.All.SendAsync("ReceiveMessage", user, message);
+        private readonly ApplicationDbContext _context;
+
+        public WebSocketUtilities(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        [HubMethodName("SendMessage")]
+        public async Task SendMessage(Guid userId, string messageText)
+        {
+            var message = new Message
+            {
+                UserId = userId,
+                Content = messageText,
+                Timestamp = DateTime.Now
+            };
+
+            // Сохраняем сообщение в базе данных
+            _context.Messages.Add(message);
+            await _context.SaveChangesAsync();
+
+            // Отправляем сообщение всем подключенным клиентам
+            await Clients.All.SendAsync("ReceiveMessage", userId, messageText);
+        }
+
+        public async Task SendMessageToCaller(Guid userId, string messageText) =>
+            await Clients.Caller.SendAsync("ReceiveMessage", userId, messageText);
+
+        public async Task SendMessageToGroup(Guid userId, string messageText, string groupName) =>
+            await Clients.Group(groupName).SendAsync("ReceiveMessage", userId, messageText);
     }
-
-    public async Task SendMessageToCaller(string user, string message) =>
-        await Clients.Caller.SendAsync("ReceiveMessage", user, message);
-
-    public async Task SendMessageToGroup(string user, string message, string groupName) =>
-        await Clients.Group(groupName).SendAsync("ReceiveMessage", user, message);
 }

@@ -17,10 +17,11 @@ namespace Relay.DBUtility
             _logger = logger;
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Chat> Chats { get; set; }
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<ServerDbModel> Servers { get; set; }
+        // Используем модификатор required
+        public required DbSet<User> Users { get; set; }
+        public required DbSet<Chat> Chats { get; set; }
+        public required DbSet<Message> Messages { get; set; }
+        public required DbSet<ServerDbModel> Servers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

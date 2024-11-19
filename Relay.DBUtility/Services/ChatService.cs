@@ -15,12 +15,12 @@ namespace Relay.Services
             _context = context;
         }
 
-        public async Task<Chat> GetChatAsync(int id) =>
+        public async Task<Chat> GetChatAsync(Guid id) =>
             await _context.Chats
                 .Include(c => c.Users)
                 .Include(c => c.Messages)
                 .FirstOrDefaultAsync(c => c.Id == id)
-            ?? throw new KeyNotFoundException($"Chat with ID {id} not found.");
+            ?? throw new KeyNotFoundException($"Чат с таким ID {id} не найден.");
 
         public async Task<Chat> CreateChatAsync(Chat chat)
         {

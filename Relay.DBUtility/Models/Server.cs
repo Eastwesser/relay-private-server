@@ -1,3 +1,5 @@
+using System;
+
 namespace Relay.DBUtility.Models
 {
     /// <summary>
@@ -6,7 +8,7 @@ namespace Relay.DBUtility.Models
     public class ServerDbModel
     {
         /// <summary> Идентификатор сервера. </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         /// <summary> Название сервера. </summary>
         public string Name { get; set; } = string.Empty;

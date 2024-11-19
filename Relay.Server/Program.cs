@@ -78,6 +78,7 @@ namespace Relay.Server
             app.MapControllers();
 
             Log.Information("Application starting...");
+            app.MapGet("/", () => Results.Content("Добро пожаловать на сервер Relay!", "text/plain"));
             await app.RunAsync();
         }
     }
